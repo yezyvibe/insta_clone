@@ -52,9 +52,13 @@ INSTALLED_APPS = [
     # my apps
     'accounts',
     'articles',
+
+    # CORS
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -143,3 +147,5 @@ REST_FRAMEWORK = {
 }
 
 SITE_ID = 1
+
+CORS_ORIGIN_ALLOW_ALL = True  # 특정한 것만 열어주려면 whitelist 넣기
