@@ -37,9 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # signup
 
     # DRF
     'rest_framework',
+    'rest_framework.authtoken',
+
+    # rest_auth + allauth
+    'rest_auth',  # login, logout
+    'allauth',  # signup
+    'allauth.account',  # signup
+    'rest_auth.registration',  # signup
 
     # my apps
     'accounts',
@@ -127,3 +135,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
+SITE_ID = 1
