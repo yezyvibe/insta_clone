@@ -10,7 +10,7 @@
       <input v-model="loginData.password" id="password" type="password">
     </div>
     <div>
-    <button>로그인 하기</button>
+    <button @click="login">로그인 하기</button>
     </div>
   </div>
 </template> 
@@ -24,6 +24,11 @@ export default {
         username: null,
         password: null,
       }
+    }
+  },
+  methods: {
+    login() {
+      this.$emit('submit-login-data', this.loginData)
     }
   }
 
