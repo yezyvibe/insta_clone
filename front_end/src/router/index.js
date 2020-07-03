@@ -2,8 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import LoginView from '../views/accounts/LoginView.vue'
-
-// import SignupView from '../views/accounts/SignupView.vue'
+import SignupView from '../views/accounts/SignupView.vue'
 
 // import CreateView from '../views/articles/CreateView.vue'
 // import ListView from '../views/articles/ListView.vue'
@@ -17,11 +16,15 @@ Vue.use(VueRouter)
     name: 'Home',
     component: Home
   },
-
   {
     path: '/accounts/login',
     name: 'Login',
     component: LoginView,
+  },
+  {
+    path: 'accounts/signup',
+    name: 'signup',
+    component: SignupView,
   }
 ]
 

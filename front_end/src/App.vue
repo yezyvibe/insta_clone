@@ -2,8 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'Login' }">Login</router-link> |
-      <router-link @click.native="logout" to="/accounts/logout">Logout</router-link>
+      <router-link v-if="!isLoggedIn" :to="{ name: 'Login' }">Login</router-link> |
+      <router-link v-if="isLoggedIn" to="/accounts/logout" @click.native="logout">Logout</router-link>
     </div>
     <router-view @submit-login-data="login"/>
   </div>
@@ -11,6 +11,7 @@
 <script>
 import axios from 'axios'
 const SERVER_URL = 'http://localhost:8000'
+
 export default {
   name: 'App',
   data() {
@@ -39,13 +40,22 @@ export default {
         }
       }
 
-      axios.post(SERVER_URL + '/rest-auth/logout/',)
+      axios.post(SERVER_URL + '/rest-auth/logout/', null, requestHeaders) //순서는 url, body, header
         .then(() => {
           this.$cookies.remove('auth-token')
           this.isLoggedIn = false
           this.$router.push({ name: 'Home' }) //로그아웃 후 홈으로 보내주기
         })
         .catch(err => console.log(err.response.data))
+    }
+  },
+  mounted() {
+    // cookie에 auth-token이 존재하는지 체크
+    // this.isLoggedIn = this.$cookies.isKey('auth-token') ? true : false  이렇게도 쓸 수 있다.
+    if (this.$cookies.isKey('auth-token')) {
+      this.isLoggedIn = true
+    } else {
+      this.isLoggedIn = false
     }
   },
 }
