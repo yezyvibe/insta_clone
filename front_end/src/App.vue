@@ -3,9 +3,13 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link v-if="!isLoggedIn" :to="{ name: 'Login' }">Login</router-link> |
+      <router-link v-if="!isLoggedIn" :to="{ name: 'Signup' }">Signup</router-link> |
       <router-link v-if="isLoggedIn" to="/accounts/logout" @click.native="logout">Logout</router-link>
+      <div>
+        {{ errorMessages }}
+      </div>
     </div>
-    <router-view @submit-login-data="login"/>
+    <router-view @submit-login-data="login" @submit-signup-data="signup"/>
   </div>
 </template>
 <script>
@@ -24,16 +28,28 @@ export default {
       this.$cookies.set('auth-token', token)
       this.isLoggedIn = true
     },
-    login(loginData) {
+
+    signup(signupData) {
+      axios.post(SERVER_URL + '/rest-auth/signup/', signupData)
+        .then(res => {
+          this.setCookie(res.data.key)
+          this.$router.push({ name: 'Home' })
+        })
+        .catch(err => this.errorMessages = err.response.data)
+    },
+
+    login(loginData) { 
       // console.log('login!', loginData)
       axios.post(SERVER_URL + '/rest-auth/login/', loginData)
         .then(res => {
           this.setCookie(res.data.key)
           this.$router.push({ name: 'Home' })
         })
-        .catch(err => console.log(err.response.data))
+        .catch(err => this.errorMessages = err.response.data)
     },
+
     logout() {
+      // requestHeaders 대신 config로 작성 가능
       const requestHeaders = {
         headers: {
           'Authorization': `Token ${this.$cookies.get('auth-token')}`
@@ -46,7 +62,7 @@ export default {
           this.isLoggedIn = false
           this.$router.push({ name: 'Home' }) //로그아웃 후 홈으로 보내주기
         })
-        .catch(err => console.log(err.response.data))
+        .catch(err => this.errorMessages = err.response.data)
     }
   },
   mounted() {

@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import LoginView from '../views/accounts/LoginView.vue'
 import SignupView from '../views/accounts/SignupView.vue'
 
-// import CreateView from '../views/articles/CreateView.vue'
+import CreateView from '../views/articles/CreateView.vue'
 // import ListView from '../views/articles/ListView.vue'
 
 
@@ -23,9 +23,14 @@ Vue.use(VueRouter)
   },
   {
     path: 'accounts/signup',
-    name: 'signup',
+    name: 'Signup',
     component: SignupView,
-  }
+  },
+  {
+    path: 'articles/create',
+    name: 'Create',
+    component: CreateView,
+  },
 ]
 
 const router = new VueRouter({
