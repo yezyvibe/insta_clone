@@ -2,8 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link :to="{ name: 'List' }">Articles</router-link> |
       <router-link v-if="!isLoggedIn" :to="{ name: 'Login' }">Login</router-link> |
       <router-link v-if="!isLoggedIn" :to="{ name: 'Signup' }">Signup</router-link> |
+      <router-link v-if="isLoggedIn" :to="{ name: 'Create' }">New Article</router-link> |
       <router-link v-if="isLoggedIn" to="/accounts/logout" @click.native="logout">Logout</router-link>
       <div>
         {{ errorMessages }}
@@ -21,6 +23,7 @@ export default {
   data() {
     return { 
       isLoggedIn: false, //플래그
+      errorMessages: null,
     }
   },
   methods: {
@@ -52,7 +55,7 @@ export default {
       // requestHeaders 대신 config로 작성 가능
       const requestHeaders = {
         headers: {
-          'Authorization': `Token ${this.$cookies.get('auth-token')}`
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
         }
       }
 

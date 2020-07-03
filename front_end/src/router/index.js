@@ -5,7 +5,7 @@ import LoginView from '../views/accounts/LoginView.vue'
 import SignupView from '../views/accounts/SignupView.vue'
 
 import CreateView from '../views/articles/CreateView.vue'
-// import ListView from '../views/articles/ListView.vue'
+import ListView from '../views/articles/ListView.vue'
 
 
 Vue.use(VueRouter)
@@ -22,15 +22,29 @@ Vue.use(VueRouter)
     component: LoginView,
   },
   {
-    path: 'accounts/signup',
+    path: '/accounts/signup',
     name: 'Signup',
     component: SignupView,
   },
   {
-    path: 'articles/create',
+    path: '/articles/create',
     name: 'Create',
     component: CreateView,
+
+    // vue router navigation guard 참고!!!
+    // beforeEnter(from, to, next) {
+    //   if (!Vue.$cookies.isKey('auth-token')) {
+    //     next('/accounts/login')
+    //   } else {
+    //     next()
+    //   }
+    // }
   },
+  {
+    path: '/articles',
+    name: 'List',
+    component: ListView,
+  }
 ]
 
 const router = new VueRouter({
