@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+
 import LoginView from '../views/accounts/LoginView.vue'
 import SignupView from '../views/accounts/SignupView.vue'
+import ProfileView from '../views/accounts/ProfileView.vue'
 
 import CreateView from '../views/articles/CreateView.vue'
 import ListView from '../views/articles/ListView.vue'
@@ -44,6 +46,11 @@ Vue.use(VueRouter)
     path: '/articles',
     name: 'List',
     component: ListView,
+  },
+  {
+    path:'/profile',   //유저네임으로 바꾸기 
+    name: 'Profile',
+    component: ProfileView,
   }
 ]
 

@@ -18,7 +18,7 @@
 <script>
 export default {
   name: 'LoginView',
-  data () {    // data modeling하기
+  data() {    // data modeling하기
     return {
       loginData: {
         username: null,
