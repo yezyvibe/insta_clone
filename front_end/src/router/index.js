@@ -48,7 +48,7 @@ Vue.use(VueRouter)
     component: ListView,
   },
   {
-    path:'/profile',   //유저네임으로 바꾸기 
+    path:'/:username',   //variable routing
     name: 'Profile',
     component: ProfileView,
   }

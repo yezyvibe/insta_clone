@@ -10,8 +10,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+const SERVER_URL = 'http://localhost:8000'
+
 export default {
   name: 'MyInfo',
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    fetchInfo() {
+      axios.get(SERVER_URL + '/accounts/profile/')
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err))
+    },
+  },
+  created() {
+    this.fetchInfo()
+  }
 }
 </script>
 
