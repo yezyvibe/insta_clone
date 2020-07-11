@@ -48,7 +48,8 @@ Vue.use(VueRouter)
     component: ListView,
   },
   {
-    path:'/:username',   //variable routing
+    //dynamic route matching
+    path:'/:username', // 동적 세그먼트는 콜론부터 시작
     name: 'Profile',
     component: ProfileView,
   }

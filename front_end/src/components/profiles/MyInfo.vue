@@ -2,9 +2,7 @@
   <div>
     <h1>MyInfo</h1>
     <span>
-      게시글 
-      팔로워
-      팔로우
+      {{ info }}
     </span>
   </div>
 </template>
@@ -17,15 +15,16 @@ export default {
   name: 'MyInfo',
   data() {
     return {
-
+      username : this.$route.params.username,
+      info: []    
     }
   },
   methods: {
     fetchInfo() {
-      axios.get(SERVER_URL + '/accounts/profile/')
-        .then(res => console.log(res.data))
+      axios.get(SERVER_URL + '/accounts/'+ this.username)
+        .then(res => this.info = res.data)
         .catch(err => console.error(err))
-    },
+    }
   },
   created() {
     this.fetchInfo()

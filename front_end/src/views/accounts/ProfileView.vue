@@ -9,13 +9,12 @@
 <script>
 import MyInfo from '@/components/profiles/MyInfo.vue'
 import ArticleList from '@/components/profiles/ArticleList.vue'
-// import axios from 'axios'
 
 export default {
   name: 'ProfileView',
   data() {
     return {
-
+      
     }
   },
   components: {
