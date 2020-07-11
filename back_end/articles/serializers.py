@@ -12,3 +12,9 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'
+
+class UserArticleSerializer(serializers.ModelSerializer):
+   user = UserSerializer(required=False)
+   class Meta:
+        model = Article
+        fields = '__all__'
